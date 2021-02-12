@@ -31,6 +31,7 @@ public:
 	bool modifyVote(string key);
 	bool registerVoter(string postalCode,Node* voterNode);
 	void printVotersZipCode(string key);
+	bool removeVoter(string pCode, Node* e);
 
 	//removeVoter (makes use of remove node in votedLinkedList)
 	//addVoter (makes use of addFront if no such PCode, addFront of votedLinkedList in all cases)

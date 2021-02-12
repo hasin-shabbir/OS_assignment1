@@ -46,14 +46,16 @@ voterProfile* HashMap::search(const string key)
 	
 }
 //=====================================================
-bool HashMap::remove(const string key)
+bool HashMap::remove(const string key, postalCodeLinkedList& pCodeLL)
 {
 	bool removed;
 	int index = hashCode(key) % this->capacity;	//Get the index of the bucket
 	
 	//cout << "ind:" << index << endl << endl;
 	//buckets[index].printAll();
-	
+
+	pCodeLL.removeVoter(buckets[index].getNode(key)->postalCode, buckets[index].getNodePointer(key));
+
 	removed=buckets[index].removeNode(key);
 
 	//buckets[index].printAll();

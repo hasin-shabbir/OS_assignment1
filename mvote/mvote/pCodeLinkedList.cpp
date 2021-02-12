@@ -156,3 +156,11 @@ void postalCodeLinkedList::printVotersZipCode(string postalCode) {
     }
 }
 
+bool postalCodeLinkedList::removeVoter(string pCode, Node* e) {
+    votedLinkedList* vLL = this->getNode(pCode);
+    if (vLL != NULL) {
+        vLL->removeNode(e);
+        return true;
+    }
+    return false;
+}

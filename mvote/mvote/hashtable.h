@@ -21,7 +21,7 @@ public:
 	unsigned long hashCode(const string key);
 	void insert(const voterProfile vp);
 	voterProfile* search(const string key); //returns pointer to the voter profile with a specific RIN, NULL if not found
-	bool remove(const string key);
+	bool remove(const string key, postalCodeLinkedList& pCodeLL);
 	bool modifyVoteStatus(const string key, postalCodeLinkedList& pCodeLL);
 	int getSize();
 	int getNumVoted();

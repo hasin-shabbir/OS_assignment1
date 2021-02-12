@@ -223,7 +223,7 @@ int menu(HashMap& hMap, postalCodeLinkedList& pCodeLL) {
 		string ctype, RIN;
 		getline(parameterStream, ctype, ' ');
 		getline(parameterStream, RIN);
-		if (hMap.remove(RIN)) {
+		if (hMap.remove(RIN, pCodeLL)) {
 			cout << "Record deleted successfully\n";
 		};
 
