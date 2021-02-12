@@ -1,0 +1,265 @@
+////////////////////////////////////////////////
+//THIS IS FOR TESTING THE LINKED LIST IN MAIN//
+//////////////////////////////////////////////
+voterProfile h;
+	h.fName = "hasin";
+	h.lName = "shabbir";
+	h.postalCode = "00000";
+	h.RIN = "12345";
+	h.voted = true;
+
+	voterProfile i;
+	i.fName = "ibrahim";
+	i.lName = "gillani";
+	i.postalCode = "001122";
+	i.RIN = "98765";
+	i.voted = false;
+
+	linkedList myLL;
+	myLL.addFront(h);
+	myLL.addFront(i);
+
+	voterProfile g = myLL.front();
+	cout << g.RIN<<endl;
+
+	myLL.removeNode("98765");
+
+	g = myLL.front();
+	cout << g.RIN << endl;
+///////////////////////////////////////
+//END OF TESTING LINKED LIST IN MAIN//
+/////////////////////////////////////
+
+
+
+////////////////////////////////////
+//NODE OF HASHMAP USED PREVIOUSLY//
+//////////////////////////////////
+class HashNode
+{
+public:
+	string key;
+	string value;
+public:
+	HashNode(string key, string value)
+	{
+		this->key = key;
+		this->value = value;
+	}
+	friend class HashMap;
+};
+///////////////////////////////////////////
+//END OF NODE OF HASHMAP USED PREVIOUSLY//
+/////////////////////////////////////////
+
+
+
+////////////////////////////
+//TESTING HASHMAP IN MAIN//
+//////////////////////////
+	voterProfile h;
+	h.fName = "hasin";
+	h.lName = "shabbir";
+	h.postalCode = "00000";
+	h.RIN = "12345";
+	h.voted = true;
+
+	voterProfile i;
+	i.fName = "ibrahim";
+	i.lName = "gillani";
+	i.postalCode = "001122";
+	i.RIN = "98765";
+	i.voted = false;
+
+	HashMap myHashMap(2);
+	myHashMap.insert(h);
+	myHashMap.insert(i);
+
+	voterProfile* gotIt = myHashMap.search("98765");
+	cout << gotIt->fName<<endl<<gotIt->lName<<endl<< gotIt->postalCode<<endl<< gotIt->RIN<<endl<< gotIt->voted<<endl;
+
+	myHashMap.remove("98765");
+	gotIt = myHashMap.search("98765");
+
+	cout << "size: " << myHashMap.getSize() << "\n";
+
+///////////////////////////////////
+//END OF TESTING HASHMAP IN MAIN//
+/////////////////////////////////
+
+
+
+
+/////////////////////////////////
+//MORE TESTING HASHMAP IN MAIN//
+///////////////////////////////
+	voterProfile h;
+	h.fName = "hasin";
+	h.lName = "shabbir";
+	h.postalCode = "00000";
+	h.RIN = "1";
+	h.voted = true;
+
+	voterProfile i;
+	i.fName = "ibrahim";
+	i.lName = "gillani";
+	i.postalCode = "001122";
+	i.RIN = "13";
+	i.voted = false;
+
+	voterProfile j;
+	j.fName = "hanzalla";
+	j.lName = "usman";
+	j.postalCode = "694200";
+	j.RIN = "3";
+	j.voted = false;
+
+	HashMap myHashMap(2);
+	myHashMap.insert(h);
+	myHashMap.insert(i);
+	myHashMap.insert(j);
+
+
+	voterProfile* gotIt = myHashMap.search("1");
+	cout << gotIt->fName << endl << gotIt->lName << endl << gotIt->postalCode << endl << gotIt->RIN << endl << gotIt->voted << endl;
+
+	gotIt = myHashMap.search("13");
+	cout << gotIt->fName << endl << gotIt->lName << endl << gotIt->postalCode << endl << gotIt->RIN << endl << gotIt->voted << endl;
+	gotIt = myHashMap.search("3");
+	cout << gotIt->fName << endl << gotIt->lName << endl << gotIt->postalCode << endl << gotIt->RIN << endl << gotIt->voted << endl;
+
+	myHashMap.remove("13");
+
+	gotIt = myHashMap.search("13");
+	cout << endl;
+	//cout << gotIt->fName << endl << gotIt->lName << endl << gotIt->postalCode << endl << gotIt->RIN << endl << gotIt->voted << endl;
+
+
+	cout << "size: " << myHashMap.getSize() << "\n";
+
+////////////////////////////////////////
+//END OF MORE TESTING HASHMAP IN MAIN//
+//////////////////////////////////////
+
+
+
+
+
+///////////////////////////
+//COMMAND IMPLEMENTATION//
+/////////////////////////
+commandType = choice.substr(0, choice.find(" "));
+	parameters = choice.substr(choice.find(" ") + 1);
+	/*string* inputString=new string[choice.length()];
+	inputString = splitStringGetWord(choice);
+	commandType = inputString[0];*/
+	cout <<"CTYPE: "<< commandType<<endl;
+	/*stringstream inputStream(choice);
+	inputStream >> commandType;
+
+	cout << "command type: " << commandType << endl;*/
+
+	if (commandType == "l") {
+		cout << "here\n";
+		string RIN;
+		RIN = parameters;
+		cout << "RIN: " << RIN << endl;
+		voterProfile* vp;
+		vp=hMap.search(RIN);
+
+		if (vp != NULL) {
+			cout << "VOTER PROFILE\n"
+				<< "First Name: " << vp->fName<<endl
+				<< "Last Name: " << vp->lName<<endl
+				<< "RIN: " << vp->RIN<<endl
+				<< "Postal Code: " << vp->postalCode<<endl
+				<< " Voted: ";
+
+			if (vp->voted) {
+				cout << "YES\n";
+			}
+			else {
+				cout << "NO\n";
+			}
+		}
+		else {
+			cout << "Record with this RIN not found\n";
+		}
+
+		return 1;
+	}
+
+	else if (commandType == "i") {
+		string RIN, fName, lName, postalCode;
+		RIN = parameters.substr(0, parameters.find(" "));
+		parameters = parameters.substr(parameters.find(" ")+1);
+		voterProfile* vp;
+		vp = hMap.search(RIN);
+		if (vp != NULL) {
+			cout << "Voter with this RIN already exists!\n";
+		}
+		else {
+			lName = parameters.substr(0, parameters.find(" "));
+			parameters = parameters.substr(parameters.find(" ") + 1);
+			fName = parameters.substr(0, parameters.find(" "));
+			parameters = parameters.substr(parameters.find(" ") + 1);
+			postalCode = parameters.substr(0, parameters.find(" "));
+			parameters = parameters.substr(parameters.find(" ") + 1);
+		/*	lName = inputString[2];
+			fName = inputString[3];
+			postalCode = inputString[4];*/
+
+			voterProfile newVoter;
+			newVoter.fName = fName;
+			newVoter.lName = lName;
+			newVoter.postalCode = postalCode;
+			newVoter.RIN = RIN;
+			newVoter.voted = false;
+			hMap.insert(newVoter);
+			
+			cout << "New voter record successfully added!\n";
+		}
+
+		return 2;
+	}
+	else if (commandType == "d") {
+
+		return 3;
+	}
+	else if (commandType == "r") {
+
+		return 4;
+	}
+	else if (commandType == "bv") {
+
+		return 5;
+	}
+	else if (commandType == "v") {
+
+		return 6;
+	}
+	else if (commandType == "perc") {
+
+		return 7;
+	}
+	else if (commandType == "z") {
+
+		return 8;
+	}
+	else if (commandType == "o") {
+
+		return 9;
+	}
+	else if (commandType == "exit") {
+		cout << "Program exited successfully\n";
+		return 10;
+	}
+	else {
+		cout << "Invalid command!, please enter a valid command only\n";
+		return 11;
+	}
+	//return 1;
+
+//////////////////////////////////
+//END OF COMMAND IMPLEMENTATION//
+////////////////////////////////
