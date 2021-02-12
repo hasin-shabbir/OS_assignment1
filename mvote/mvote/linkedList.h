@@ -40,8 +40,6 @@ public:
 	bool removeNode(string RIN); //remove a specific node
 	void printAll();
 	bool modifyVote(string key);
-	
-
 };
 
 #endif

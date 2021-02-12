@@ -43,6 +43,32 @@ votedLinkedList* postalCodeLinkedList::getNode(string pCode) const {
         return NULL;
         /*throw out_of_range("The pCode List is empty!\n");*/ //if list is empty, throw exception
 }
+pCodeNode* postalCodeLinkedList::getNodePointer(string pCode) const {
+
+    if (!empty()) {
+        pCodeNode* node = this->head; //start from the head of the linked list
+        while (node->pCode != pCode) { //search for the node with the specific RIN
+            node = node->nextPtr; //continue traversing the linked list until the node with the specific RIN is found
+            if (node != NULL) {
+                continue;
+            }
+            else {
+                break;
+            }
+        }
+
+        if (node != NULL) {
+            return (node); //return the voterProfile with the specific RIN
+        }
+        else {
+
+            return NULL; //if no node found, return
+        }
+
+    }
+    else
+        throw out_of_range("The pCode List is empty!\n"); //if list is empty, throw exception
+}
 
 void postalCodeLinkedList::addFront(string pCode,Node* e)
 {
@@ -52,6 +78,7 @@ void postalCodeLinkedList::addFront(string pCode,Node* e)
     v->votersList->addFront(e);
     v->nextPtr = head;
     head = v; //the new node is made the head node
+    size++;
 }
 
 void postalCodeLinkedList::removeFront() {
@@ -78,6 +105,7 @@ bool postalCodeLinkedList::removeNode(string pCode) {
 
         this->head = temp->nextPtr; // Changed head
         delete temp;            // free old head
+        size--;
         return true;
     }
 
@@ -103,6 +131,7 @@ bool postalCodeLinkedList::removeNode(string pCode) {
 
         // Free memory
         delete temp;
+        size--;
         return true;
     }
 }
@@ -125,19 +154,16 @@ void postalCodeLinkedList::printAll() {
 
 bool postalCodeLinkedList::registerVoter(string pCode, Node* voterNode) {
     if (head == NULL) {
-        cout << "here"<<endl;
         this->addFront(pCode, voterNode);
         return true;
     }
     votedLinkedList* vLL = this->getNode(pCode);
     if (vLL != NULL) {
-        cout << "here2" << endl;
 
         vLL->addFront(voterNode);
         return true;
     }
     else {
-        cout << "here3" << endl;
 
         this->addFront(pCode, voterNode);
         return true;
@@ -158,9 +184,66 @@ void postalCodeLinkedList::printVotersZipCode(string postalCode) {
 
 bool postalCodeLinkedList::removeVoter(string pCode, Node* e) {
     votedLinkedList* vLL = this->getNode(pCode);
+    int countBeforeRemoval = this->getNode(pCode)->getSize();
     if (vLL != NULL) {
         vLL->removeNode(e);
+        if (this->getNodePointer(pCode) != NULL) {
+            if ((countBeforeRemoval-1)==0){
+                this->removeNode(pCode);
+            }
+        }
         return true;
     }
     return false;
+}
+
+void postalCodeLinkedList::sorter(postalCodeLinkedList& pCodeLL, pCodeNode* currNode) {
+    currNode->nextPtr = pCodeLL.head;
+    pCodeLL.head = currNode;
+    /*if (pCodeLL.head == NULL || pCodeLL.head->votersList->getSize() <= currNode->votersList->getSize()) {
+        currNode->nextPtr = pCodeLL.head;
+        pCodeLL.head = currNode;
+    }
+    else {
+        pCodeNode* refNode;
+        refNode = pCodeLL.head;
+        while (refNode->nextPtr != NULL && refNode->nextPtr->votersList->getSize() > currNode->votersList->getSize()) {
+            refNode = refNode->nextPtr;
+        }
+        currNode->nextPtr = refNode->nextPtr;
+        refNode->nextPtr = currNode;
+    }*/
+}
+void postalCodeLinkedList::swapArr(sortedStruct& elOne, sortedStruct& elTwo) {
+    sortedStruct temp;
+    temp = elOne;
+    elOne = elTwo;
+    elTwo = temp;
+}
+
+void postalCodeLinkedList::descendingOrder() {
+    int count = this->size;
+    sortedStruct* sortedList = new sortedStruct[count];
+    pCodeNode* currNode = this->head;
+    for (int i = 0; i < count; i++) {
+        sortedList[i].numVoters = currNode->votersList->getSize();
+        sortedList[i].pCode = currNode->pCode;
+        currNode = currNode->nextPtr;
+    }
+
+    for (int i = 0; i < count - 1; i++) {
+        for (int j = 0; j < count - i - 1; j++) {
+            if (sortedList[j].numVoters < sortedList[j+1].numVoters) {
+                swapArr(sortedList[j], sortedList[j+1]);
+                /*sortedStruct temp;
+                temp = sortedList[j];
+                sortedList[j] = sortedList[j + 1];
+                sortedList[j + 1] = temp;*/
+            }
+        }
+    }
+
+    for (int i = 0; i < count; i++) {
+        cout << "Zip Code: " << sortedList[i].pCode << " Num of Votes cast: " << sortedList[i].numVoters << endl;
+    }
 }

@@ -53,8 +53,9 @@ bool HashMap::remove(const string key, postalCodeLinkedList& pCodeLL)
 	
 	//cout << "ind:" << index << endl << endl;
 	//buckets[index].printAll();
-
-	pCodeLL.removeVoter(buckets[index].getNode(key)->postalCode, buckets[index].getNodePointer(key));
+	if (buckets[index].getNode(key)->voted == true) {
+		pCodeLL.removeVoter(buckets[index].getNode(key)->postalCode, buckets[index].getNodePointer(key));
+	}
 
 	removed=buckets[index].removeNode(key);
 

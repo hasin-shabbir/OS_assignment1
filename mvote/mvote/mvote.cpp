@@ -269,7 +269,7 @@ int menu(HashMap& hMap, postalCodeLinkedList& pCodeLL) {
 		return 8;
 	}
 	else if (commandType == "o") {
-
+		pCodeLL.descendingOrder();
 		return 9;
 	}
 	else if (commandType == "exit") {

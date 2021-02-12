@@ -1,2 +1,4 @@
-﻿  pCodeLinkedList.cpp
+﻿  hashtable.cpp
+C:\Users\hasin\source\repos\mvote\mvote\hashtable.cpp(16,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\hasin\source\repos\mvote\mvote\hashtable.cpp(17,29): warning C4244: '+=': conversion from 'double' to 'unsigned long', possible loss of data
   mvote.vcxproj -> C:\Users\hasin\source\repos\mvote\Debug\mvote.exe
