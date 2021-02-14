@@ -1,0 +1,3 @@
+﻿  mvote.cpp
+C:\Users\hasin\source\repos\mvote\mvote\mvote.cpp(87,20): warning C4018: '<': signed/unsigned mismatch
+  mvote.vcxproj -> C:\Users\hasin\source\repos\mvote\Debug\mvote.exe
