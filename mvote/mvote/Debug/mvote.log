@@ -1,2 +1,6 @@
-﻿  hashtable.cpp
+﻿  mvote.cpp
+C:\Users\hasin\source\repos\mvote\mvote\mvote.cpp(76,13): warning C4244: 'return': conversion from 'double' to 'int', possible loss of data
+C:\Users\hasin\source\repos\mvote\mvote\mvote.cpp(109,20): warning C4018: '<': signed/unsigned mismatch
+  pCodeLinkedList.cpp
+  Generating Code...
   mvote.vcxproj -> C:\Users\hasin\source\repos\mvote\Debug\mvote.exe

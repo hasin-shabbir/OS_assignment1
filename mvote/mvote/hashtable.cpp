@@ -55,6 +55,7 @@ bool HashMap::remove(const string key, postalCodeLinkedList& pCodeLL)
 
 	if (buckets[index].getNode(key)->voted == true) { //if the voter has already voted, remove them from the postal code linked list of registered votes too
 		pCodeLL.removeVoter(buckets[index].getNode(key)->postalCode, buckets[index].getNodePointer(key));
+		numVoted--;
 	}
 
 	removed=buckets[index].removeNode(key); //remove the voter profile from the hashtable

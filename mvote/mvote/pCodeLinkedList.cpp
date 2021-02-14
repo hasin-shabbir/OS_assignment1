@@ -221,6 +221,13 @@ void postalCodeLinkedList::swapArr(sortedStruct& elOne, sortedStruct& elTwo) {
 void postalCodeLinkedList::descendingOrder() {
     //get the number of postal codes where votes have been cast
     int count = this->size;
+
+    //if no votes have been cast, report as such
+    if (count == 0) {
+        cout << "No votes have been cast yet" << endl;
+        return;
+    }
+
     //create a dynamic structure to hold the postal code and their respective number of votes cast
     sortedStruct* sortedList = new sortedStruct[count];
 
@@ -232,14 +239,8 @@ void postalCodeLinkedList::descendingOrder() {
         currNode = currNode->nextPtr;
     }
 
-    //use bubble sort to sort the dynamic array
-    for (int i = 0; i < count - 1; i++) {
-        for (int j = 0; j < count - i - 1; j++) {
-            if (sortedList[j].numVoters < sortedList[j+1].numVoters) {
-                swapArr(sortedList[j], sortedList[j+1]);
-            }
-        }
-    }
+    //use heapsort to sort the list in decreasing order of votes cast
+    heapSort(sortedList);
 
     //output the required information in decreasing order of votes cast
     for (int i = 0; i < count; i++) {
@@ -248,4 +249,39 @@ void postalCodeLinkedList::descendingOrder() {
 
     //deallocate the dynamically allocated memory
     delete[] sortedList;
+}
+
+//function to heapify an array as a max heap
+void postalCodeLinkedList::heapify(sortedStruct* arr, int n, int i) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left<n && arr[left].numVoters<arr[largest].numVoters) {
+        largest = left;
+    }
+
+    if (right<n && arr[right].numVoters<arr[largest].numVoters) {
+        largest = right;
+    }
+
+    if (largest != i) {
+        swapArr(arr[i], arr[largest]);
+        heapify(arr, n, largest);
+    }
+
+}
+
+//function to implement heapsort
+void postalCodeLinkedList::heapSort(sortedStruct* arr) {
+    for (int i = size / 2 - 1; i >= 0; i--) {
+        heapify(arr,size, i);//create a max heap from the array
+    }
+
+    for (int i = size - 1; i > 0; i--) {
+        //keep extracting the root from the max heap and heapify again for all the elements of the array
+        swapArr(arr[0], arr[i]);
+        heapify(arr, i, 0);
+    }
+
 }
