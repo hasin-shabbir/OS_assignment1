@@ -2,9 +2,9 @@
 ## User guide:
 The program facilitates the implementation of a vote monitoring system where the user has the options to look up, modify, or purge records, or access polling statistics.
 The user will invoke the program using the following invocation and flags:
-<br>
+<br><br>
 _./mvote -f registeredvoters -m hashtablesize_
-<br>
+<br><br>
 where -f is the flag for file of voters and -m is the flag for size of hashtable. Providing valid arguments is essential for the program to run. If the flag -m is not provided, then the program opens the registeredvoters file and reads it line by line, incrementing a counter linecount after every line. This way, we get the number of records in the file and this is assigned as the size of the hashtable.
 The program presents the user with a menu of available commands with their required parameters. Upon receiving the input of the command, the program executes the relevant operations and displays the output to the terminal. This process continues until the user decides to exit the program. Further, the user must provide valid inputs of commands and their parameters or else they will be presented with an error message.
 
